@@ -5,6 +5,8 @@ import java.util.Random;
 /**
  * Created by Mike on 04.02.2016.
  */
+
+//task "Make Set" from random array[]
 public class Lesson04February {
     public static int NULL_ELEMENT = -1;
 
