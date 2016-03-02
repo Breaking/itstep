@@ -41,7 +41,7 @@ public class ContactsManager {
             } else if ("4".equals(mainMenu)) {
                 viewAllContacts(names, phones, addresses, daysOfBirthdays, monthsOfBirthdays, yearsOfBirthdays, ids);
             } else if ("5".equals(mainMenu)) {
-                sortChoice(scanner, names, ids);
+                sortChoice(scanner, ids, names, phones, addresses, daysOfBirthdays, monthsOfBirthdays, yearsOfBirthdays);
             } else {
                 System.out.println("Incorrect input");
             }
@@ -51,19 +51,29 @@ public class ContactsManager {
 
 
     public static void printHeader() {
-        System.out.println("All records: ");
-        System.out.println("-----------------------------------------------------------------------------");
-        System.out.println("| ID |        NAME       |    PHONE    |         ADDRESS         | BIRTHDAY |");
-        System.out.println("-----------------------------------------------------------------------------");
+        System.out.println("-------------------------------------------------------------------------------");
+        System.out.println("| ID |        NAME       |    PHONE    |         ADDRESS         |  BIRTHDAY  |");
+        System.out.println("-------------------------------------------------------------------------------");
 
     }
+    public static void printFooter(){
+        System.out.println("-------------------------------------------------------------------------------");
+    }
 
-    public static void printLine(){
+    public static void printLine(int id, String name, String phone, String address, int dayOfBirthday, int monthOfBirthday,
+                                 int yearOfBirthday){
+        System.out.printf("|" + "%5s", id + "|");
+        System.out.printf("%20s", name + "|");
+        System.out.printf("%14s", phone + "|");
+        System.out.printf("%26s", address + "|");
+        System.out.printf("%13s", dayOfBirthday + "." + monthOfBirthday + "." + yearOfBirthday + "|");
+        System.out.println();
 
     }
 
     public static void viewAllContacts(String[] names, String[] phones, String[] addresses, int[] daysOfBirthdays, int[] monthsOfBirthdays,
                                        int[] yearsOfBirthdays, boolean[] ids) {
+        System.out.println("All records: ");
         printHeader();
         for (int i = 0; i < ids.length; i++) {
             if (ids[i]) {
@@ -71,15 +81,15 @@ public class ContactsManager {
                 System.out.printf("%20s", names[i] + "|");
                 System.out.printf("%14s", phones[i] + "|");
                 System.out.printf("%26s", addresses[i] + "|");
-                System.out.printf(" %10s", daysOfBirthdays[i] + "." + monthsOfBirthdays[i] + "." + yearsOfBirthdays[i] + "|");
+                System.out.printf("%13s", daysOfBirthdays[i] + "." + monthsOfBirthdays[i] + "." + yearsOfBirthdays[i] + "|");
                 System.out.println();
             }
         }
-        System.out.println("-----------------------------------------------------------------------------");
+        printFooter();
     }
 
-    public static void addContact(Scanner scanner, String[] names, String[] phones, String[] addresses, int[] daysOfBirthdays, int[] monthsOfBirthdays,
-                                  int[] yearsOfBirthdays, boolean[] ids) {
+    public static void addContact(Scanner scanner, String[] names, String[] phones, String[] addresses, int[] daysOfBirthdays,
+                                  int[] monthsOfBirthdays, int[] yearsOfBirthdays, boolean[] ids) {
         System.out.println("|Adding|");
         System.out.println("Enter name");
         String name = scanner.nextLine();
@@ -118,10 +128,10 @@ public class ContactsManager {
 
     }
 
-    public static void sortChoice(Scanner scanner, String[] names, boolean[] ids) {
-        System.out.println("|Sorting|");
-
+    public static void sortChoice(Scanner scanner, boolean[] ids, String[] names, String[] phones, String[] addresses, int[] daysOfBirthdays,
+                                  int[] monthsOfBirthdays, int[] yearsOfBirthdays) {
         while (true) {
+            System.out.println("|Sorting|");
             System.out.println("1-Sort by NAME");
             System.out.println("2-Sort by Year of Birth");
             System.out.println("0-Back to previous menu");
@@ -130,7 +140,7 @@ public class ContactsManager {
             if ("0".equals(sortMenu)) {
                 break;
             } else if ("1".equals(sortMenu)) {
-                sortViewByName(ids, names);
+                sortViewByName(ids, names, phones, addresses, daysOfBirthdays, monthsOfBirthdays, yearsOfBirthdays);
             } else if ("2".equals(sortMenu)) {
 
             } else {
@@ -140,17 +150,44 @@ public class ContactsManager {
 
     }
 
-    public static void sortViewByName(boolean[] ids, String[] names){
+    public static void sortViewByName(boolean[] ids, String[] names, String[] phones, String[] addresses, int[] daysOfBirthdays,
+                                      int[] monthsOfBirthdays, int[] yearsOfBirthdays){
         int minI = 0;
         int k = 0;
         String[] namesSearch = new String[ids.length];
 
+        System.out.println("Sorted by NAME contacts:");
 
+        printHeader();
 
+        for(int i = 0; i < ids.length; i++){
+            if(ids[i]){
+                for(int i1 = 0; i1 < ids.length; i1++){
+                    if (ids[i1] && !findIn(names[i1], namesSearch)) {
+                        minI = i1;
+                        break;
+                    }
+                }
+
+                for(int j = 0; j < ids.length; j++){
+                    if(ids[j] && !findIn(names[j], namesSearch) && names[j].compareTo(names[minI]) <= 0){
+                        minI = j;
+                    }
+                }
+                namesSearch[k] = names[minI];
+                k++;
+
+                printLine(minI, names[minI], phones[minI], addresses[minI], daysOfBirthdays[minI], monthsOfBirthdays[minI], yearsOfBirthdays[minI]);
+
+            }
+        }
+
+        printFooter();
 
 
     }
-
+    //Belong to method addContact()
+    //Searching place(id) for a new contact
     public static int findId(boolean[] ids) {
         for (int i = 0; i < ids.length; i++) {
             if (!ids[i]) {
@@ -160,6 +197,16 @@ public class ContactsManager {
         System.out.println("ERROR");
         return -1;
 
+    }
+
+    //Belong to sorting
+    public static boolean findIn(String s, String[] m){
+        for(int i = 0; i < m.length; i++){
+            if(s.equals(m[i])){
+                return true;
+            }
+        }
+        return false;
     }
 
 }
