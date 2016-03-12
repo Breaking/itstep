@@ -1,5 +1,6 @@
 package com.company;
 
+import java.io.*;
 import java.util.Scanner;
 
 /**
@@ -7,17 +8,24 @@ import java.util.Scanner;
  */
 public class ContactsManager {
     public static int MAX = 5;
+    public static String IDS = "id.dat";
+    public static String NAMES = "names.dat";
+    public static String ADDRESSES = "addresses.dat";
+    public static String PHONES = "phones.dat";
+    public static String DAY_BIRTHDAYS = "dbirthdays.dat";
+    public static String MONTH_BIRTHDAYS = "mbirthdays.dat";
+    public static String YEAR_BIRTHDAYS = "ybirthdays.dat";
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         Scanner scanner = new Scanner(System.in);
-        String[] names = new String[MAX];
-        String[] phones = new String[MAX];
-        String[] addresses = new String[MAX];
-        int[] daysOfBirthdays = new int[MAX];
-        int[] monthsOfBirthdays = new int[MAX];
-        int[] yearsOfBirthdays = new int[MAX];
+        String[] names = readStringFromFile(NAMES);
+        String[] phones = readStringFromFile(PHONES);
+        String[] addresses = readStringFromFile(ADDRESSES);
+        int[] daysOfBirthdays = readIntFromFile(DAY_BIRTHDAYS);
+        int[] monthsOfBirthdays = readIntFromFile(MONTH_BIRTHDAYS);
+        int[] yearsOfBirthdays = readIntFromFile(YEAR_BIRTHDAYS);
 
-        boolean[] ids = new boolean[MAX];
+        boolean[] ids = readBooleanFromFile(IDS);
 
         while (true) {
             System.out.println("*******Contacts manager********");
@@ -33,6 +41,13 @@ public class ContactsManager {
 
             if ("0".equals(mainMenu)) {
                 System.out.println("Bye :)");
+                saveToFile(ids, IDS);
+                saveToFile(names, NAMES);
+                saveToFile(phones, PHONES);
+                saveToFile(addresses, ADDRESSES);
+                saveToFile(daysOfBirthdays, DAY_BIRTHDAYS);
+                saveToFile(monthsOfBirthdays, MONTH_BIRTHDAYS);
+                saveToFile(yearsOfBirthdays, YEAR_BIRTHDAYS);
                 break;
             } else if ("1".equals(mainMenu)) {
                 addContact(scanner, names, phones, addresses, daysOfBirthdays, monthsOfBirthdays, yearsOfBirthdays, ids);
@@ -208,5 +223,57 @@ public class ContactsManager {
         }
         return false;
     }
+
+
+    public static void saveToFile(String[] mas, String fileName) throws IOException {
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(fileName));
+        objectOutputStream.writeObject(mas);
+        objectOutputStream.close();
+    }
+
+    public static void saveToFile(int[] mas, String fileName) throws IOException {
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(fileName));
+        objectOutputStream.writeObject(mas);
+        objectOutputStream.close();
+    }
+
+    public static void saveToFile(boolean[] mas, String fileName) throws IOException {
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(fileName));
+        objectOutputStream.writeObject(mas);
+        objectOutputStream.close();
+    }
+
+    public static String[] readStringFromFile(String fileName) throws IOException, ClassNotFoundException {
+        File file = new File(fileName);
+        if(file.exists()) {
+            ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(fileName));
+            return (String[]) objectInputStream.readObject();
+        } else {
+            return new String[MAX];
+        }
+    }
+
+    public static int[] readIntFromFile(String fileName) throws IOException, ClassNotFoundException {
+        File file = new File(fileName);
+        if(file.exists()) {
+            ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(fileName));
+            return (int[]) objectInputStream.readObject();
+        } else {
+            return new int[MAX];
+        }
+    }
+
+    public static boolean[] readBooleanFromFile(String fileName) throws IOException, ClassNotFoundException {
+        File file = new File(fileName);
+        if(file.exists()) {
+            ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(fileName));
+            return (boolean[]) objectInputStream.readObject();
+        } else {
+            return new boolean[MAX];
+        }
+    }
+
+
+
 
 }

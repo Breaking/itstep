@@ -5,7 +5,8 @@ package com.company.utils;
  */
 public class ExampleSortByName {
     public static void main(String[] args){
-        String[] names = {"name4", "", "name2", "name3", "name1"};
+        //String[] names = {"name4", "", "name2", "name3", "name1"};
+        String[] names = {"Mike Krivosheev", "", "zzzz", "aaaa", "bbbb"};
         int[] y = {1965, 0, 1965, 3456, 7764};
         int[] m = {1, 0, 3, 4, 5};
         int[] d = {1, 0, 3, 12, 22};
