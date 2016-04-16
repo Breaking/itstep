@@ -1,6 +1,4 @@
-package com.company.oop;
-
-import com.company.Main;
+package com.company.oop.contactsmanager;
 
 import java.util.Scanner;
 

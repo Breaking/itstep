@@ -1,4 +1,4 @@
-package com.company;
+package com.company.proceduredev;
 
 /**
  * Created by Mike on 19.01.2016.

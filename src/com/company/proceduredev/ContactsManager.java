@@ -1,4 +1,4 @@
-package com.company;
+package com.company.proceduredev;
 
 import java.io.*;
 import java.util.Scanner;

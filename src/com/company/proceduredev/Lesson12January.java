@@ -1,4 +1,4 @@
-package com.company;
+package com.company.proceduredev;
 
 import java.util.IntSummaryStatistics;
 import java.util.Random;

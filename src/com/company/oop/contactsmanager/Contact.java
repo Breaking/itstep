@@ -1,4 +1,4 @@
-package com.company.oop;
+package com.company.oop.contactsmanager;
 
 /**
  * Created by Mike on 12.03.2016.

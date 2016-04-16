@@ -1,39 +1,24 @@
-package com.company;
-
-import com.company.utils.MasUtils;
+package com.company.proceduredev;
 
 import java.util.Random;
 
 /**
- * Created by Mike on 11.02.2016.
+ * Created by Mike on 04.02.2016.
  */
-public class Lesson11February {
+
+//task "Make Set" from random array[]
+public class Lesson04February {
     public static int NULL_ELEMENT = -1;
 
     public static void main(String[] args){
         int[] mas = new int[10];
-        int[] resultMas;
-        int[] temp;
-
+        int[] mas2;
 
         initMas(mas);
-        MasUtils.printMas(mas);
-        resultMas = getSet(mas);
+        printMas(mas);
         System.out.println();
-        MasUtils.printMas(resultMas);
-        System.out.println();
-        System.out.println("---------------------Result------------------");
-
-        for(int i = 0; i < 9; i++){
-            initMas(mas);
-            temp = mergeMas(resultMas, mas);
-            resultMas = getSet(temp);
-            System.out.println(i + 1);
-            MasUtils.printMas(mas);
-            System.out.println();
-            MasUtils.printMas(resultMas);
-            System.out.println();
-        }
+        mas2 = getSet(mas);
+        printMas(mas2);
 
     }
 
@@ -43,6 +28,13 @@ public class Lesson11February {
             mas[i] = random.nextInt(10);
         }
 
+    }
+
+    public static void printMas(int[] mas){
+        for(int i = 0; i < mas.length; i++){
+            System.out.printf("%5d", mas[i]);
+
+        }
     }
 
     public static int[] getSet(int[] mas){
@@ -58,6 +50,9 @@ public class Lesson11February {
                 result[count] = mas[i];
                 count++;
             }
+
+            //result[count] = mas[i];
+            //count++;
         }
 
         int[] r = new int[calculateSize(result)];
@@ -85,20 +80,4 @@ public class Lesson11February {
         }
         return length;
     }
-
-    public static int[] mergeMas(int[] m1, int[] m2){
-        int[] m = new int[m1.length + m2.length];
-
-        for(int i = 0; i < m1.length; i++){
-            m[i] = m1[i];
-        }
-
-        for(int i = m1.length; i < m.length; i++){
-            m[i] = m2[i - m1.length];
-        }
-        return m;
-    }
-
-
-
 }
