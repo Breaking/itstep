@@ -6,6 +6,7 @@ package com.company.oop.contactsbook;
 public interface IBookService {
     void add(Contact contact);
     void delete(int index);
+    Contact[] getAll();
     void view(int index);
     void edit(int index);
 }

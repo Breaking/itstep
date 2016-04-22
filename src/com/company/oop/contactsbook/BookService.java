@@ -5,11 +5,11 @@ package com.company.oop.contactsbook;
  */
 public class BookService implements IBookService {
 
-    ContactArray contactArray = new ContactArray();
+    private ContactArray contactArray = new ContactArray();
 
     @Override
     public void add(Contact contact) {
-
+        contactArray.add(contact);
     }
 
     @Override
@@ -18,8 +18,12 @@ public class BookService implements IBookService {
     }
 
     @Override
-    public void view(int index) {
+    public Contact[] getAll() {
+        return contactArray.getContacts();
+    }
 
+    @Override
+    public void view(int index) {
     }
 
     @Override

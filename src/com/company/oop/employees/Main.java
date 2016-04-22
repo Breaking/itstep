@@ -24,9 +24,6 @@ public class Main {
         fixedSalaryEmployee.setDepartment(market);
         hourSalaryEmployee.setDepartment(qa);
 
-
-
-
         fixedSalaryEmployee.print();
         hourSalaryEmployee.print();
         newEmployee.print();

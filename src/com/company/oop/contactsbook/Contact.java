@@ -4,7 +4,7 @@ package com.company.oop.contactsbook;
  * Created by Mike on 05.04.2016.
  */
 public class Contact {
-    private int id;
+    private long id;
     private String name;
     private String phone;
     private String address;
@@ -12,11 +12,11 @@ public class Contact {
     private int monthOfBirthday;
     private int yearOfBirthday;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
