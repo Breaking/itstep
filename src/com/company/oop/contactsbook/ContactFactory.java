@@ -6,9 +6,9 @@ import javax.swing.*;
  * Created by Mike on 19.04.2016.
  */
 public class ContactFactory {
-    private Contact contact = new Contact();
 
     public Contact create(){
+        Contact contact = new Contact();
         contact.setId(Long.valueOf(JOptionPane.showInputDialog("id: ")));
         contact.setName(JOptionPane.showInputDialog("name: "));
         contact.setPhone(JOptionPane.showInputDialog("phone: "));

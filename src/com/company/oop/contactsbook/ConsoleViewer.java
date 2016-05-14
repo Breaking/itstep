@@ -8,7 +8,7 @@ public class ConsoleViewer {
     private ConsoleViewer() {
     }
 
-    public static void showMenu(){
+    public static void showMenu() {
         System.out.println("*******Contacts manager********");
         System.out.println("Enter your choice: ");
         System.out.println("1-Add");
@@ -19,34 +19,32 @@ public class ConsoleViewer {
         System.out.println("0-Exit");
     }
 
-    public static void addMessage(){
+    public static void addMessage() {
         System.out.println("|Adding|");
     }
 
-    public static void byeMessage(){
+    public static void byeMessage() {
         System.out.println("Bye :)");
     }
 
-    public static void errorMessage(){
+    public static void errorMessage() {
         System.out.println("Incorrect input");
     }
 
-    public static void viewAll(Contact[] contacts){
+    public static void viewAll(Contact[] contacts) {
         System.out.println("All records: ");
         printHeader();
         for (int i = 0; i < contacts.length; i++) {
-            if(contacts[i] != null){
-                if (contacts[i] != null) {
-                    System.out.printf("|" + "%5s", i + "|");
-                    System.out.printf("%20s", contacts[i].getName() + "|");
-                    System.out.printf("%14s", contacts[i].getPhone() + "|");
-                    System.out.printf("%26s", contacts[i].getAddress() + "|");
-                    System.out.printf("%13s", contacts[i].getDayOfBirthday() + "." + contacts[i].getMonthOfBirthday() +
-                            "." + contacts[i].getYearOfBirthday() + "|");
-                    System.out.println();
-                } else
-                    break;
-            }
+            if (contacts[i] != null) {
+                System.out.printf("|" + "%5s", contacts[i].getId() + "|");
+                System.out.printf("%20s", contacts[i].getName() + "|");
+                System.out.printf("%14s", contacts[i].getPhone() + "|");
+                System.out.printf("%26s", contacts[i].getAddress() + "|");
+                System.out.printf("%13s", contacts[i].getDayOfBirthday() + "." + contacts[i].getMonthOfBirthday() +
+                        "." + contacts[i].getYearOfBirthday() + "|");
+                System.out.println();
+            } else
+                break;
         }
         printFooter();
     }
